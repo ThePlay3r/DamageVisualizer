@@ -1,0 +1,35 @@
+# Big thanks and love for using my plugins! ^^
+
+#|--------------------------------------------------------------------------------------------------------------------|#
+# Plugin: DamageVisualizer
+# Author: https://www.mc-market.org/members/89497/
+# Description: Main API for all of my plugins to work.
+# Dependencies:
+#   -> PLJRApi
+#|--------------------------------------------------------------------------------------------------------------------|#
+
+##################\
+# Settings Setup #############################################################\
+################## Here, you can enable or disable functions of this plugin. # \
+                 #############################################################  \
+settings:
+  hologram-time: 15 #-> How long should the damage hologram last? (In ticks)
+  hologram-x-offset: 0.0 #-> What should be the offset of hologram's X axis?
+  hologram-y-offset: 1.3 #-> What should be the offset of hologram's Y axis?
+  hologram-z-offset: 0.0 #-> What should be the offset of hologram's Z axis?
+  actionbar-time: 5 #-> How long should the damage actionbar last?
+#|--------------------------------------------------------------------------------------------------------------------|#
+
+##############\
+# Lang Setup ################################################################\
+############## Here, you can customize messages, send by the plugin itself. # \
+             ################################################################  \
+damage-hologram:
+  - "§c-%damage"
+
+lang:
+  ACTIONBAR_TEXT: "§8>> §a%currentHealth§7/§a%maxHealth §8<<"
+  FORMAT_DAMAGE: "####.#"
+  FORMAT_HEALTH: "####.#"
+  FORMAT_MAX: "####.#"
+#|--------------------------------------------------------------------------------------------------------------------|#
