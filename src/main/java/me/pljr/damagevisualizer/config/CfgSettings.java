@@ -1,19 +1,19 @@
 package me.pljr.damagevisualizer.config;
 
-import me.pljr.pljrapi.managers.ConfigManager;
+import me.pljr.pljrapispigot.managers.ConfigManager;
 
 public class CfgSettings {
-    public static int hologramTime;
-    public static double hologramXOffset;
-    public static double hologramYOffset;
-    public static double hologramZOffset;
-    public static int actionbarTime;
+    public static int HOLOGRAM_TIME;
+    public static double HOLOGRAM_X_OFFSET;
+    public static double HOLOGRAM_Y_OFFSET;
+    public static double HOLOGRAM_Z_OFFSET;
+    public static int ACTIONBAR_TIME;
 
     public static void load(ConfigManager config){
-        hologramTime = config.getInt("settings.hologram-time");
-        hologramXOffset = config.getDouble("settings.hologram-x-offset");
-        hologramYOffset = config.getDouble("settings.hologram-y-offset");
-        hologramZOffset = config.getDouble("settings.hologram-z-offset");
-        actionbarTime = config.getInt("settings.actionbar-time");
+        HOLOGRAM_TIME = config.getInt("settings.hologram-time");
+        HOLOGRAM_X_OFFSET = config.getDouble("settings.hologram-x-offset");
+        HOLOGRAM_Y_OFFSET = config.getDouble("settings.hologram-y-offset");
+        HOLOGRAM_Z_OFFSET = config.getDouble("settings.hologram-z-offset");
+        ACTIONBAR_TIME = config.getInt("settings.actionbar-time");
     }
 }

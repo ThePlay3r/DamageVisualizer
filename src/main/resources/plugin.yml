@@ -1,7 +1,7 @@
 name: DamageVisualizer
 version: ${project.version}
 main: me.pljr.damagevisualizer.DamageVisualizer
-api-version: 1.16
-depend: [PLJRApi]
+api-version: 1.13
+depend: [PLJRApi-Spigot]
 authors: [9hx]
 description: Simple plugin to display damage dealt to entities.

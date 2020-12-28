@@ -1,12 +1,11 @@
 package me.pljr.damagevisualizer.listeners;
 
 import me.pljr.damagevisualizer.DamageVisualizer;
-import me.pljr.damagevisualizer.config.CfgLang;
 import me.pljr.damagevisualizer.config.CfgSettings;
-import me.pljr.damagevisualizer.enums.Lang;
-import me.pljr.pljrapi.managers.ActionBarManager;
-import me.pljr.pljrapi.objects.PLJRActionBar;
-import me.pljr.pljrapi.utils.HologramsUtil;
+import me.pljr.damagevisualizer.config.Lang;
+import me.pljr.pljrapispigot.managers.ActionBarManager;
+import me.pljr.pljrapispigot.objects.PLJRActionBar;
+import me.pljr.pljrapispigot.utils.HologramsUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -27,25 +26,25 @@ public class EntityDamageByEntityListener implements Listener {
         LivingEntity entity = (LivingEntity) event.getEntity();
         Player damager = (Player) event.getDamager();
         double damage = event.getDamage();
-        String damageString = new DecimalFormat(CfgLang.lang.get(Lang.FORMAT_DAMAGE)).format(damage);
-        Location location = entity.getLocation().add(CfgSettings.hologramXOffset, CfgSettings.hologramYOffset, CfgSettings.hologramZOffset);
+        String damageString = new DecimalFormat(Lang.FORMAT_DAMAGE.get()).format(damage);
+        Location location = entity.getLocation().add(CfgSettings.HOLOGRAM_X_OFFSET, CfgSettings.HOLOGRAM_Y_OFFSET, CfgSettings.HOLOGRAM_Z_OFFSET);
         List<String> hologramText = new ArrayList<>();
-        for (String line : CfgLang.hologramText){
-            hologramText.add(line.replace("%damage", damageString));
+        for (String line : Lang.HOLOGRAM_TEXT){
+            hologramText.add(line.replace("{damage}", damageString));
         }
-        HologramsUtil.create(location, hologramText, CfgSettings.hologramTime);
+        HologramsUtil.create(location, hologramText, CfgSettings.HOLOGRAM_TIME);
         Bukkit.getScheduler().runTaskLaterAsynchronously(DamageVisualizer.getInstance(), ()->{
             double health = entity.getHealth();
             double max = entity.getMaxHealth();
-            String healthString = new DecimalFormat(CfgLang.lang.get(Lang.FORMAT_HEALTH)).format(health);
-            String maxString = new DecimalFormat(CfgLang.lang.get(Lang.FORMAT_MAX)).format(max);
+            String healthString = new DecimalFormat(Lang.FORMAT_HEALTH.get()).format(health);
+            String maxString = new DecimalFormat(Lang.FORMAT_MAX.get()).format(max);
 
             ActionBarManager.send(damager, new PLJRActionBar(
-                    CfgLang.lang.get(Lang.ACTIONBAR_TEXT)
-                            .replace("%damage", damageString)
-                            .replace("%currentHealth", healthString+"")
-                            .replace("%maxHealth", maxString+""),
-                    CfgSettings.actionbarTime));
+                    Lang.ACTIONBAR_TEXT.get()
+                            .replace("{damage}", damageString)
+                            .replace("{currentHealth}", healthString+"")
+                            .replace("{maxHealth}", maxString+""),
+                    CfgSettings.ACTIONBAR_TIME));
         }, 2);
     }
 }

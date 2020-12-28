@@ -5,7 +5,7 @@
 # Author: https://www.mc-market.org/members/89497/
 # Description: Main API for all of my plugins to work.
 # Dependencies:
-#   -> PLJRApi
+#   -> PLJRApi-Spigot
 #|--------------------------------------------------------------------------------------------------------------------|#
 
 ##################\
@@ -25,10 +25,10 @@ settings:
 ############## Here, you can customize messages, send by the plugin itself. # \
              ################################################################  \
 damage-hologram:
-  - "§c-%damage"
+  - "§c-{damage}"
 
 lang:
-  ACTIONBAR_TEXT: "§8>> §a%currentHealth§7/§a%maxHealth §8<<"
+  ACTIONBAR_TEXT: "§8>> §a{currentHealth}§7/§a{maxHealth} §8<<"
   FORMAT_DAMAGE: "####.#"
   FORMAT_HEALTH: "####.#"
   FORMAT_MAX: "####.#"
