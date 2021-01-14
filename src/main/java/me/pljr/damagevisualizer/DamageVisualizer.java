@@ -8,7 +8,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DamageVisualizer extends JavaPlugin {
     private static DamageVisualizer instance;
-    private static ConfigManager configManager;
 
     @Override
     public void onEnable() {
@@ -20,9 +19,8 @@ public final class DamageVisualizer extends JavaPlugin {
 
     private void setupConfig(){
         saveDefaultConfig();
-        configManager = new ConfigManager(this, "config.yml");
-        Lang.load(configManager);
-        CfgSettings.load(configManager);
+        Lang.load(new ConfigManager(this, "lang.yml"));
+        CfgSettings.load(new ConfigManager(this, "config.yml"));
     }
 
     private void setupListeners(){

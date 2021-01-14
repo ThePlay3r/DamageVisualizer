@@ -18,18 +18,5 @@ settings:
   hologram-y-offset: 1.3 #-> What should be the offset of hologram's Y axis?
   hologram-z-offset: 0.0 #-> What should be the offset of hologram's Z axis?
   actionbar-time: 5 #-> How long should the damage actionbar last?
-#|--------------------------------------------------------------------------------------------------------------------|#
-
-##############\
-# Lang Setup ################################################################\
-############## Here, you can customize messages, send by the plugin itself. # \
-             ################################################################  \
-damage-hologram:
-  - "§c-{damage}"
-
-lang:
-  ACTIONBAR_TEXT: "§8>> §a{currentHealth}§7/§a{maxHealth} §8<<"
-  FORMAT_DAMAGE: "####.#"
-  FORMAT_HEALTH: "####.#"
-  FORMAT_MAX: "####.#"
+  projectile-only-player: false #-> Should we only inform player about projectiles hit to other players?
 #|--------------------------------------------------------------------------------------------------------------------|#
