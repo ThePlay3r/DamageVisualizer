@@ -9,6 +9,7 @@ Spigot plugin for visualizing damage.
 ## 📋 Features
 - Action bar HP and Damage indicator.
 - Cool on-hit hologram effect, with the damage dealt.
+- Projectile hit information.  
 - MySQL Support.
 - Huge Configuration.
 
