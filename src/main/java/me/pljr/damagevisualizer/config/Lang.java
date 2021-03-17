@@ -1,15 +1,15 @@
 package me.pljr.damagevisualizer.config;
 
 import me.pljr.pljrapispigot.managers.ConfigManager;
+import me.pljr.pljrapispigot.utils.FormatUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
-import java.util.List;
 
 public enum Lang {
-    HOLOGRAM_TEXT("§c-{damage}"),
-    ACTIONBAR_TEXT("§8>> §a{currentHealth}§7/§a{maxHealth} §8<<"),
-    PROJECTILE_TEXT("§8>> &eYou hit &6{target} &efrom &6{distance} blocks &efor &6{damage} damage&e." +
+    HOLOGRAM_TEXT("&c-{damage}"),
+    ACTIONBAR_TEXT("&8>> &a{currentHealth}&7/&a{maxHealth} &8<<"),
+    PROJECTILE_TEXT("&8>> &eYou hit &6{target} &efrom &6{distance} blocks &efor &6{damage} damage&e." +
             "\n&eCurrent health is &c{currentHealth}❤"),
     FORMAT_DAMAGE("####.#"),
     FORMAT_HEALTH("####.#"),
@@ -28,18 +28,15 @@ public enum Lang {
         FileConfiguration fileConfig = config.getConfig();
         for (Lang lang : Lang.values()){
             if (!fileConfig.isSet(lang.toString())){
-                fileConfig.set(lang.toString(), lang.getDefault());
+                fileConfig.set(lang.toString(), lang.defaultValue);
+            }else{
+                Lang.lang.put(lang, config.getString(lang.toString()));
             }
-            Lang.lang.put(lang, config.getString(lang.toString()));
         }
         config.save();
     }
 
     public String get(){
-        return lang.get(this);
-    }
-
-    public String getDefault(){
-        return this.defaultValue;
+        return lang.getOrDefault(this, FormatUtil.colorString(defaultValue));
     }
 }

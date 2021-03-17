@@ -1,9 +1,9 @@
 package me.pljr.damagevisualizer.listeners;
 
+import lombok.AllArgsConstructor;
 import me.pljr.damagevisualizer.DamageVisualizer;
-import me.pljr.damagevisualizer.config.CfgSettings;
 import me.pljr.damagevisualizer.config.Lang;
-import me.pljr.pljrapispigot.managers.ActionBarManager;
+import me.pljr.damagevisualizer.config.Settings;
 import me.pljr.pljrapispigot.objects.PLJRActionBar;
 import me.pljr.pljrapispigot.utils.ChatUtil;
 import me.pljr.pljrapispigot.utils.HologramsUtil;
@@ -15,13 +15,17 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@AllArgsConstructor
 public class EntityDamageByEntityListener implements Listener {
+
+    private final JavaPlugin plugin;
+    private final Settings settings;
 
     @EventHandler
     public void onProjectile(EntityDamageByEntityEvent event){
@@ -48,21 +52,21 @@ public class EntityDamageByEntityListener implements Listener {
         Player damager = (Player) event.getDamager();
         double damage = event.getDamage();
         String damageString = new DecimalFormat(Lang.FORMAT_DAMAGE.get()).format(damage);
-        Location location = entity.getLocation().add(CfgSettings.HOLOGRAM_X_OFFSET, CfgSettings.HOLOGRAM_Y_OFFSET, CfgSettings.HOLOGRAM_Z_OFFSET);
+        Location location = entity.getLocation().add(settings.getHologramXOffset(), settings.getHologramYOffset(), settings.getHologramZOffset());
         List<String> hologramText = Arrays.asList(Lang.HOLOGRAM_TEXT.get().replace("{damage}", damageString).split("\n"));
-        HologramsUtil.create(location, hologramText, CfgSettings.HOLOGRAM_TIME);
-        Bukkit.getScheduler().runTaskLaterAsynchronously(DamageVisualizer.getInstance(), ()->{
+        HologramsUtil.create(location, hologramText, settings.getHologramTime());
+        Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, ()->{
             double health = entity.getHealth();
             double max = entity.getMaxHealth();
             String healthString = new DecimalFormat(Lang.FORMAT_HEALTH.get()).format(health);
             String maxString = new DecimalFormat(Lang.FORMAT_MAX.get()).format(max);
 
-            ActionBarManager.send(damager, new PLJRActionBar(
+            new PLJRActionBar(
                     Lang.ACTIONBAR_TEXT.get()
                             .replace("{damage}", damageString)
                             .replace("{currentHealth}", healthString+"")
                             .replace("{maxHealth}", maxString+""),
-                    CfgSettings.ACTIONBAR_TIME));
+                    settings.getActionbarTime()).send(damager);
         }, 2);
     }
 }
